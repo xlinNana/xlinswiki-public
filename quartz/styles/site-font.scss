@@ -1,0 +1,39 @@
+// Keep XLinsWiki's self-hosted subset font while the visual theme is supplied
+// by @quartz-themes/encore.
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("/static/fonts/LXGWWenKai-XLinsWiki.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+:root {
+  --font-text: "LXGW WenKai", "霞鹜文楷", serif;
+  --font-text-theme: "LXGW WenKai", "霞鹜文楷", serif;
+  --font-interface: "LXGW WenKai", "霞鹜文楷", sans-serif;
+  --font-interface-theme: "LXGW WenKai", "霞鹜文楷", sans-serif;
+  --bodyFont: "LXGW WenKai", "霞鹜文楷", serif;
+  --headerFont: "LXGW WenKai", "霞鹜文楷", serif;
+  --titleFont: "LXGW WenKai", "霞鹜文楷", serif;
+  --h1-font: "LXGW WenKai", "霞鹜文楷", serif;
+  --h2-font: "LXGW WenKai", "霞鹜文楷", serif;
+  --h3-font: "LXGW WenKai", "霞鹜文楷", serif;
+  --h4-font: "LXGW WenKai", "霞鹜文楷", serif;
+  --h5-font: "LXGW WenKai", "霞鹜文楷", serif;
+  --h6-font: "LXGW WenKai", "霞鹜文楷", serif;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+#quartz-root h1,
+#quartz-root h2,
+#quartz-root h3,
+#quartz-root h4,
+#quartz-root h5,
+#quartz-root h6 {
+  font-family: "LXGW WenKai", "霞鹜文楷", var(--bodyFont), serif !important;
+}
