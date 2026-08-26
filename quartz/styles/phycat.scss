@@ -1,0 +1,203 @@
+// Self-hosted LXGW WenKai supplied with XLinsWiki.
+@font-face {
+  font-family: "LXGW WenKai";
+  src: url("/static/fonts/LXGWWenKai-XLinsWiki.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+// This intentionally targets Quartz DOM elements instead of Obsidian-only
+// selectors, while leaving XLinsWiki's existing responsive grid untouched.
+
+:root {
+  --phycat-glass-light: rgba(255, 255, 255, 0.62);
+  --phycat-glass-dark: rgba(29, 24, 40, 0.72);
+  --phycat-border-light: rgba(255, 255, 255, 0.72);
+  --phycat-border-dark: rgba(255, 255, 255, 0.14);
+  --phycat-shadow-light: 0 10px 35px rgba(119, 82, 112, 0.12);
+  --phycat-shadow-dark: 0 12px 38px rgba(0, 0, 0, 0.28);
+  --phycat-radius: 16px;
+  --phycat-radius-small: 11px;
+  --phycat-code-dot-red: #ff5f57;
+  --phycat-code-dot-yellow: #febc2e;
+  --phycat-code-dot-green: #28c840;
+}
+
+// Sky palette adapted from Phycat's theme-light-sky scheme.
+:root[saved-theme="light"] {
+  --light: #f4faff;
+  --lightgray: #ebf5fb;
+  --gray: #aed6f1;
+  --darkgray: #0a1112;
+  --dark: #080d12;
+  --secondary: #5296d5;
+  --tertiary: #3498db;
+  --highlight: rgba(52, 152, 219, 0.16);
+  --textHighlight: rgba(133, 193, 233, 0.55);
+}
+
+// Vampire-inspired dark palette.
+:root[saved-theme="dark"] {
+  --light: #191621;
+  --lightgray: #2a2333;
+  --gray: #6d6077;
+  --darkgray: #ded2e4;
+  --dark: #f8edf9;
+  --secondary: #d47daf;
+  --tertiary: #ad91dc;
+  --highlight: rgba(173, 145, 220, 0.2);
+  --textHighlight: rgba(255, 214, 92, 0.45);
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(242, 164, 197, 0.16), transparent 32rem),
+    radial-gradient(circle at 92% 12%, rgba(177, 148, 228, 0.14), transparent 30rem), var(--light);
+  font-family: "LXGW WenKai", "霞鹜文楷", var(--bodyFont), serif;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+#quartz-root.page {
+  background: transparent;
+}
+
+#quartz-root .sidebar,
+#quartz-root .center > article,
+#quartz-root .center > .page-header,
+#quartz-root .center > footer {
+  border: 1px solid var(--phycat-border-light);
+  box-shadow: var(--phycat-shadow-light);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+}
+
+#quartz-root .sidebar {
+  background: var(--phycat-glass-light);
+  border-radius: var(--phycat-radius);
+}
+
+#quartz-root .center > article {
+  background: color-mix(in srgb, var(--light) 78%, transparent);
+  border-radius: 20px;
+  padding: clamp(1.25rem, 2.2vw, 2.5rem);
+}
+
+#quartz-root .center > .page-header,
+#quartz-root .center > footer {
+  background: color-mix(in srgb, var(--light) 68%, transparent);
+  border-radius: var(--phycat-radius-small);
+}
+
+#quartz-root h1,
+#quartz-root h2,
+#quartz-root h3,
+#quartz-root h4,
+#quartz-root h5,
+#quartz-root h6 {
+  color: var(--dark);
+  letter-spacing: 0.01em;
+}
+
+#quartz-root .center > article > h1 {
+  text-align: center;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+#quartz-root article h2 {
+  padding: 0.45em 0.75em;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--secondary) 12%, transparent);
+  border-left: 4px solid var(--secondary);
+}
+
+#quartz-root article h3 {
+  border-bottom: 2px solid color-mix(in srgb, var(--tertiary) 35%, transparent);
+  padding-bottom: 0.22em;
+}
+
+#quartz-root a {
+  text-underline-offset: 0.16em;
+}
+
+#quartz-root blockquote {
+  border-left: 4px solid var(--tertiary);
+  border-radius: 0 var(--phycat-radius-small) var(--phycat-radius-small) 0;
+  background: color-mix(in srgb, var(--tertiary) 10%, transparent);
+  padding: 0.8rem 1rem;
+}
+
+#quartz-root .callout {
+  border-radius: var(--phycat-radius);
+  border-width: 1px;
+  box-shadow: 0 5px 20px color-mix(in srgb, var(--dark) 10%, transparent);
+  overflow: hidden;
+}
+
+#quartz-root .callout-title {
+  border-radius: var(--phycat-radius-small);
+}
+
+#quartz-root pre {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--darkgray) 18%, transparent);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--dark) 14%, transparent);
+  padding-top: 2.35rem;
+  overflow-x: auto;
+}
+
+// Mac-like traffic lights for Quartz code blocks.
+#quartz-root pre::before {
+  content: "";
+  position: absolute;
+  top: 0.86rem;
+  left: 1rem;
+  width: 0.68rem;
+  height: 0.68rem;
+  border-radius: 50%;
+  background: var(--phycat-code-dot-red);
+  box-shadow:
+    1.05rem 0 var(--phycat-code-dot-yellow),
+    2.1rem 0 var(--phycat-code-dot-green);
+}
+
+#quartz-root table {
+  overflow: hidden;
+  border-radius: var(--phycat-radius-small);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--dark) 8%, transparent);
+}
+
+#quartz-root th {
+  background: color-mix(in srgb, var(--secondary) 14%, var(--light));
+}
+
+:root[saved-theme="dark"] {
+  --phycat-border-light: var(--phycat-border-dark);
+}
+
+:root[saved-theme="dark"] #quartz-root .sidebar {
+  background: var(--phycat-glass-dark);
+  box-shadow: var(--phycat-shadow-dark);
+}
+
+:root[saved-theme="dark"] #quartz-root .center > article,
+:root[saved-theme="dark"] #quartz-root .center > .page-header,
+:root[saved-theme="dark"] #quartz-root .center > footer {
+  background: color-mix(in srgb, var(--light) 84%, transparent);
+  box-shadow: var(--phycat-shadow-dark);
+}
+
+@media all and (max-width: 800px) {
+  #quartz-root .center > article {
+    border-radius: var(--phycat-radius-small);
+    padding: 1rem;
+  }
+
+  #quartz-root article h2 {
+    border-radius: 12px;
+  }
+}
