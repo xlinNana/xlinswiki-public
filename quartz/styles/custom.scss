@@ -1,0 +1,61 @@
+@use "./variables.scss" as *;
+@use "./site-font.scss";
+
+// Self-host Encore's decorative background through COS instead of depending on
+// Unsplash or consuming the low-bandwidth origin server.
+:root,
+:root[saved-theme="light"],
+:root[saved-theme="dark"] {
+  --encore-translucency-image: url("https://xlinswiki-1329382380.cos.ap-guangzhou.myqcloud.com/xlinswiki-site/encore-background.webp") !important;
+}
+
+// 桌面端自适应全屏布局：页面铺满视口，正文占据主要空间，侧栏不再预留过宽空白。
+@media all and ($desktop) {
+  // 让页面外侧留白、页面容器和左右侧栏使用统一底色，避免出现断层。
+  html body,
+  html body #quartz-root.page,
+  html body #quartz-root.page > #quartz-body > .sidebar {
+    background-color: var(
+      --tab-container-background,
+      var(--background-secondary, var(--light))
+    ) !important;
+  }
+
+  html body #quartz-root.page {
+    box-sizing: border-box !important;
+    width: 94vw !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+  }
+
+  html body #quartz-root.page > #quartz-body {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    grid-template-columns:
+      clamp(260px, 22vw, 360px)
+      minmax(0, 1fr)
+      clamp(260px, 22vw, 360px) !important;
+  }
+
+  // 原主题给正文和侧栏设置了较大的固定内边距，这正是视觉上大面积留白的来源。
+  html body #quartz-root.page > #quartz-body > .sidebar {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  html body #quartz-root.page > #quartz-body > .center,
+  html body #quartz-root.page > #quartz-body > footer {
+    box-sizing: border-box;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  html body #quartz-root.page > #quartz-body > .center {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
